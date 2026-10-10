@@ -1,0 +1,28 @@
+---
+import { base, formatDate, ui, type Lang } from '../i18n';
+import { getPosts } from '../posts';
+
+interface Props {
+  lang: Lang;
+  limit?: number;
+}
+
+const { lang, limit } = Astro.props;
+const posts = (await getPosts(lang)).slice(0, limit);
+---
+
+{
+  posts.length === 0 ? (
+    <p class="muted">{ui[lang].noPosts}</p>
+  ) : (
+    <ul class="posts">
+      {posts.map((p) => (
+        <li>
+          <a href={`${base[lang]}blog/${p.slug}/`}>{p.data.title}</a>
+          <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date, lang)}</time>
+          {p.data.summary && <p>{p.data.summary}</p>}
+        </li>
+      ))}
+    </ul>
+  )
+}

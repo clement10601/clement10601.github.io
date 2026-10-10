@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from './PostList.astro';
+import { base, ui, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+---
+
+<Base lang={lang} title={ui[lang].blog} altHref={`${base[other]}blog/`}>
+  <h1>{ui[lang].blog}</h1>
+  <PostList lang={lang} />
+</Base>

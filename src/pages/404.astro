@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../i18n';
+---
+
+<Base lang="zh" title="404" altHref="/en/">
+  <h1>404</h1>
+  <p>{ui.zh.notFound} <a href="/">{ui.zh.home}</a></p>
+  <p lang="en">{ui.en.notFound} <a href="/en/">{ui.en.home}</a></p>
+</Base>

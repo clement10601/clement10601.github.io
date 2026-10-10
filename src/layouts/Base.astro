@@ -1,0 +1,54 @@
+---
+import { base, htmlLang, ui, type Lang } from '../i18n';
+import { profile } from '../data/profile';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  // Same page in the other language, for the language switch.
+  altHref: string;
+}
+
+const { lang, title, description, altHref } = Astro.props;
+const t = ui[lang];
+const fullTitle = title ? `${title} · ${profile.name}` : profile.name;
+const desc = description ?? profile[lang].tagline;
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang={htmlLang[other]} href={new URL(altHref, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="wrap">
+        <a class="brand" href={base[lang]}>{profile.name}</a>
+        <div class="nav-links">
+          <a href={base[lang]}>{t.home}</a>
+          <a href={`${base[lang]}blog/`}>{t.blog}</a>
+          <a href={altHref} hreflang={htmlLang[other]} lang={htmlLang[other]}>{t.switchLang}</a>
+        </div>
+      </nav>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer wrap">
+      <span>© {new Date().getFullYear()} {profile.name}</span>
+      <a href={profile.github}>GitHub</a>
+    </footer>
+  </body>
+</html>

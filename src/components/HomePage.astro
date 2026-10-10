@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from './PostList.astro';
+import { base, ui, type Lang } from '../i18n';
+import { profile, projects } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const me = profile[lang];
+---
+
+<Base lang={lang} altHref={lang === 'zh' ? base.en : base.zh}>
+  <section class="hero">
+    <h1>{profile.name}</h1>
+    <p class="muted">{me.tagline}</p>
+    <div class="links">
+      {profile.links.map((l) => <a href={l.href}>{l.label}</a>)}
+      {profile.email && <a href={`mailto:${profile.email}`}>Email</a>}
+    </div>
+  </section>
+
+  <h2>{t.about}</h2>
+  {me.about.map((para) => <p>{para}</p>)}
+
+  {
+    projects.length > 0 && (
+      <>
+        <h2>{t.projects}</h2>
+        <ul class="cards">
+          {projects.map((p) => (
+            <li>
+              <h3>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</h3>
+              <p>{p[lang]}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <h2>{t.latestPosts}</h2>
+  <PostList lang={lang} limit={5} />
+  <p><a href={`${base[lang]}blog/`}>{t.allPosts} →</a></p>
+</Base>
