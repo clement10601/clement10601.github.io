@@ -1,0 +1,30 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { base, formatDate, ui, type Lang } from '../i18n';
+import { getPosts } from '../posts';
+
+interface Props {
+  lang: Lang;
+  post: Awaited<ReturnType<typeof getPosts>>[number];
+}
+
+const { lang, post } = Astro.props;
+const { Content } = await render(post);
+
+// Link to the translation when one exists with the same slug, else the other blog index.
+const other: Lang = lang === 'zh' ? 'en' : 'zh';
+const translated = (await getPosts(other)).some((p) => p.slug === post.slug);
+const altHref = `${base[other]}blog/${translated ? `${post.slug}/` : ''}`;
+---
+
+<Base lang={lang} title={post.data.title} description={post.data.summary} altHref={altHref}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <time class="muted" datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  <p><a href={`${base[lang]}blog/`}>{ui[lang].backToBlog}</a></p>
+</Base>
