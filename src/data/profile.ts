@@ -11,28 +11,28 @@ export const profile = {
     { label: 'FEZone', href: 'https://fezone.tw' },
   ],
   zh: {
-    tagline: '生成式 AI 工程師 · Edge AI · 電腦視覺',
+    tagline: '生成式 AI 工程師｜邊緣 AI 與電腦視覺',
     about: [
-      '我是 AI 工程師，有 8 年軟體與人工智慧的實務經驗，涵蓋模型開發、訓練與推論部署、嵌入式系統整合、雲端與微服務架構、多媒體串流，以及生成式 AI。能獨立把 AI 產品從概念一路做到上線。',
-      '過去幾年主要在做邊緣運算上的電腦視覺：車牌辨識、人臉辨識、多路影像推論引擎，跑過 Ambarella、MediaTek、Rockchip、Qualcomm、Realtek、SigmaStar 等平台。現在在投信做生成式 AI，打造內部資料平台、影音轉文字與摘要、以及 AI 應用的 API／MCP 中介層。',
-      '使用 Linux 超過 10 年。最近感興趣的方向是自動化影片剪輯與摘要、自架多媒體生成，以及 AI 輔助的視覺特效。',
+      '8 年 AI 與軟體工程經驗，專注於把模型做成能在真實環境中穩定運作的產品——從資料、訓練、推論優化，到嵌入式部署、串流管線與雲端服務。',
+      '在 Aiyang Technology 帶領團隊開發邊緣 AI 與電腦視覺產品，包含車牌辨識（含專利方案）、人臉辨識與 20 路以上的即時影像推論引擎，橫跨六家 AI 晶片平台，並於 CES、ISC West、Embedded World 展出。現任復華投信生成式 AI 工程師，以自架 LLM 與多模態模型建置內部資料平台、影音轉錄摘要系統，以及串接 AI 應用的 API／MCP 中介層。',
+      '目前關注的方向：自動化影片剪輯與摘要、自架多媒體生成，以及 AI 輔助視覺特效。',
     ],
   },
   en: {
-    tagline: 'Generative AI Engineer · Edge AI · Computer Vision',
+    tagline: 'Generative AI Engineer | Edge AI & Computer Vision',
     about: [
-      'I am an AI engineer with 8 years of hands-on experience in software and artificial intelligence: model development, training and inference deployment, embedded system integration, cloud and microservice architecture, multimedia streaming, and generative AI. I can take an AI product from concept to deployment on my own.',
-      'For several years I focused on computer vision at the edge — license plate recognition, face recognition and multi-stream inference engines on Ambarella, MediaTek, Rockchip, Qualcomm, Realtek and SigmaStar hardware. Today I work on generative AI at an asset management firm, building internal data platforms, audio/video transcription and summarization, and an API/MCP middleware layer for AI applications.',
-      'I have used Linux for more than 10 years. Lately I am interested in automated video editing and summarization, self-hosted media generation, and AI-assisted visual effects.',
+      'AI engineer with 8 years of experience turning models into products that hold up in production — from data and training through inference optimization, embedded deployment, streaming pipelines and cloud services.',
+      'At Aiyang Technology I led the team building edge AI and computer vision products: license plate recognition (including a patented solution), face recognition, and a real-time inference engine handling 20+ video streams, across six AI chip platforms and showcased at CES, ISC West and Embedded World. I now work as a Generative AI Engineer at Fuhwa Securities Investment Trust, building internal data platforms, transcription and summarization systems, and an API/MCP middleware layer on self-hosted LLMs and multimodal models.',
+      'Current interests: automated video editing and summarization, self-hosted media generation, and AI-assisted visual effects.',
     ],
   },
 };
 
 export const highlights: { value: string; label: L }[] = [
-  { value: '8+', label: { zh: '年 AI／軟體經驗', en: 'years in AI & software' } },
-  { value: '20+', label: { zh: '路即時影像推論引擎', en: 'channel real-time inference engine' } },
-  { value: '6', label: { zh: '種邊緣 AI 晶片平台', en: 'edge AI chip platforms' } },
-  { value: '128 MB', label: { zh: 'RAM 上同時跑 3 個模型', en: 'RAM running 3 models at once' } },
+  { value: '8+', label: { zh: '年 AI 與軟體工程經驗', en: 'years in AI & software engineering' } },
+  { value: '20+', label: { zh: '路即時影像推論', en: 'real-time video streams per engine' } },
+  { value: '6', label: { zh: '家 AI 晶片平台部署經驗', en: 'AI chip platforms shipped on' } },
+  { value: '10–15 FPS', label: { zh: '128 MB RAM 上三模型並行', en: '3 models in parallel on 128 MB RAM' } },
 ];
 
 export type Job = {
@@ -48,10 +48,10 @@ export const experience: Job[] = [
     role: { zh: '生成式 AI 工程師', en: 'Generative AI Engineer' },
     period: '2025.10 – ',
     points: [
-      { zh: '開發內部資料平台與資訊整合方案。', en: 'Build internal data platforms and information-integration solutions.' },
-      { zh: '開發影音轉文字、摘要與分析平台。', en: 'Build audio/video-to-text, summarization and analysis platforms.' },
-      { zh: '開發涵蓋市場報價與情報資料的第三方資訊分析平台。', en: 'Build third-party information analysis platforms for market quotations and intelligence data.' },
-      { zh: '開發 AI 輔助業務應用，以及整合 AI 應用的 API／MCP 中介平台。', en: 'Build AI-assisted business applications and an API/MCP middleware platform for AI integration.' },
+      { zh: '建置內部資料平台，整合分散的內外部資訊來源，作為 AI 應用的資料基礎。', en: 'Build internal data platforms that consolidate internal and external sources as the data foundation for AI applications.' },
+      { zh: '開發影音轉文字、摘要與分析平台，將影音內容轉為可搜尋、可再利用的資訊。', en: 'Develop audio/video transcription, summarization and analysis platforms that turn audio and video into searchable, reusable information.' },
+      { zh: '開發市場報價與情報資料的分析平台。', en: 'Develop analysis platforms for market quotations and intelligence data.' },
+      { zh: '設計 API／MCP 中介平台，讓 AI 應用以統一介面存取內部系統，並開發 AI 輔助業務應用。', en: 'Design an API/MCP middleware platform giving AI applications a single interface to internal systems, and build AI-assisted business tools on top of it.' },
     ],
   },
   {
@@ -59,12 +59,12 @@ export const experience: Job[] = [
     role: { zh: 'AI 工程師／團隊主管', en: 'AI Engineer / Team Lead' },
     period: '2021.01 – 2025.10',
     points: [
-      { zh: '帶領電腦視覺、邊緣 AI、推論系統與 AI 產品整合的開發專案，並負責團隊管理。', en: 'Led AI projects and managed the team across computer vision, edge AI, inference systems and product integration.' },
-      { zh: '開發車牌辨識系統（含專利方案與多路串流處理），並交付智慧執法、智慧停車解決方案。', en: 'Developed license plate recognition systems, including a patented solution and multi-stream processing; delivered smart law-enforcement and smart parking solutions.' },
-      { zh: '打造第一代 16 路多模型辨識引擎（兩處場域上線）與第二代 20+ 路即時渲染輸出引擎。', en: 'Built a first-generation 16-channel multi-model recognition engine (deployed at two sites) and a second-generation 20+ channel engine with real-time rendering and output.' },
-      { zh: '參與 NIST FRVT 1:1 與 1:N 人臉辨識評測，大幅提升 1:1 排名。', en: 'Ran NIST FRVT 1:1 and 1:N face-recognition evaluations and significantly improved the 1:1 ranking.' },
-      { zh: '在 Realtek 0.8T、128 MB RAM 平台上優化超輕量人臉偵測／辨識、追蹤與手勢辨識，三個模型同時運行達 10–15 FPS。', en: 'Optimized ultra-lightweight face detection/recognition, tracking and gesture recognition on a Realtek 0.8T platform with 128 MB RAM — three models at once at 10–15 FPS.' },
-      { zh: '跨六家晶片平台開發邊緣 AI 方案，於 CES、ISC West、Embedded World 展出。', en: 'Delivered edge AI solutions across six chip vendors, demonstrated at CES, ISC West and Embedded World.' },
+      { zh: '帶領 AI 團隊，負責電腦視覺、邊緣 AI 與推論系統的技術方向、專案交付與人員管理。', en: 'Led the AI team, owning technical direction, delivery and people management across computer vision, edge AI and inference systems.' },
+      { zh: '主導多路車牌辨識系統開發（含專利方案），落地於智慧執法與智慧停車場域。', en: 'Led development of a multi-stream license plate recognition system, including a patented solution, deployed for smart law enforcement and smart parking.' },
+      { zh: '設計兩代多路推論引擎：第一代支援 16 路、多模型並行並於兩處場域上線；第二代擴展至 20+ 路並提供即時結果渲染與輸出。', en: 'Architected two generations of multi-stream inference engine: 16 channels with concurrent models in production at two sites, then 20+ channels with real-time rendering and output.' },
+      { zh: '執行 NIST FRVT 1:1 與 1:N 人臉辨識評測，顯著提升 1:1 排名。', en: 'Ran NIST FRVT 1:1 and 1:N face recognition evaluations and significantly improved the 1:1 ranking.' },
+      { zh: '在僅 128 MB RAM 的 Realtek 0.8T 平台上，讓人臉偵測、辨識與追蹤三模型並行達 10–15 FPS。', en: 'Ran face detection, recognition and tracking concurrently at 10–15 FPS on a Realtek 0.8T platform with only 128 MB RAM.' },
+      { zh: '於 Ambarella、MediaTek、Rockchip、Qualcomm、Realtek、SigmaStar 平台完成邊緣 AI 移植與優化，並於 CES、ISC West、Embedded World 展出。', en: 'Ported and optimized edge AI across Ambarella, MediaTek, Rockchip, Qualcomm, Realtek and SigmaStar, with demos at CES, ISC West and Embedded World.' },
     ],
   },
   {
@@ -72,10 +72,9 @@ export const experience: Job[] = [
     role: { zh: 'AI 工程師', en: 'AI Engineer' },
     period: '2018.01 – 2020.11',
     points: [
-      { zh: '為雲端儲存開發文件／影像理解、OCR、影像分類與智慧搜尋功能。', en: 'Built document/image understanding, OCR, image classification and intelligent search for cloud storage.' },
-      { zh: '以物件偵測開發名片偵測與文字區域偵測模組。', en: 'Developed business-card and text-region detection modules using object detection.' },
-      { zh: '以 NER（NLTK／CKIP）與自訂語言規則做文件關鍵字擷取。', en: 'Built document keyword extraction with NER (NLTK/CKIP) and custom linguistic rules.' },
-      { zh: '實作以 TF-IDF 為基礎的檔案索引與搜尋。', en: 'Researched and implemented TF-IDF-based file indexing and search.' },
+      { zh: '為雲端儲存服務開發文件與影像理解功能，包含 OCR、影像分類與智慧搜尋。', en: 'Built document and image understanding for a cloud storage service, including OCR, image classification and intelligent search.' },
+      { zh: '以物件偵測開發名片與文字區域偵測，並以輕量分類模型判斷影像是否需要 OCR 處理。', en: 'Developed business-card and text-region detection, plus a lightweight classifier that decides which images need OCR.' },
+      { zh: '結合 NER（NLTK／CKIP）與自訂語言規則擷取文件關鍵字，並以 TF-IDF 建立檔案索引與搜尋。', en: 'Extracted document keywords with NER (NLTK/CKIP) and custom linguistic rules, and built TF-IDF-based file indexing and search.' },
     ],
   },
 ];
@@ -103,33 +102,33 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: { zh: '多路影像推論引擎', en: 'Multi-stream inference engine' },
-    zh: '從第一代 16 路多模型到第二代 20+ 路、即時視覺化輸出的辨識引擎，設計與維護。',
-    en: 'Designed and maintained recognition engines, from a 16-channel multi-model first generation to a 20+ channel second generation with real-time visualization.',
+    zh: '可同時處理 20 路以上影像、多模型並行的即時辨識引擎，歷經兩代架構設計，已於實際場域上線。',
+    en: 'Real-time recognition engine running multiple models across 20+ concurrent video streams; two generations of architecture, deployed in the field.',
     tags: ['GStreamer', 'DeepStream', 'TensorRT'],
   },
   {
     name: { zh: '車牌辨識（LPR）', en: 'License plate recognition' },
-    zh: '多路車牌辨識系統，含專利方案與無柵欄車道進出辨識，應用於智慧執法與智慧停車。',
+    zh: '多路車牌辨識系統，含專利方案與無柵欄車道進出辨識，落地於智慧執法與智慧停車。',
     en: 'Multi-stream LPR with a patented solution and barrier-free lane entry/exit recognition, used for smart law enforcement and smart parking.',
     tags: ['Computer Vision', 'OCR'],
   },
   {
     name: { zh: '人臉辨識與超輕量邊緣部署', en: 'Face recognition at the edge' },
-    zh: 'FaceMatch 開發與 NIST FRVT 評測；在 128 MB RAM 裝置上同時跑偵測、辨識、追蹤三模型達 10–15 FPS。',
-    en: 'FaceMatch development and NIST FRVT evaluation; detection, recognition and tracking running together at 10–15 FPS on a 128 MB RAM device.',
+    zh: 'FaceMatch 開發與 NIST FRVT 1:1／1:N 評測；在 128 MB RAM 裝置上讓偵測、辨識、追蹤三模型並行達 10–15 FPS。',
+    en: 'FaceMatch development and NIST FRVT 1:1/1:N evaluation; detection, recognition and tracking running concurrently at 10–15 FPS on a 128 MB RAM device.',
     tags: ['Edge AI', 'NPU'],
   },
   {
     name: { zh: '企業內部生成式 AI 平台', en: 'In-house generative AI platform' },
-    zh: '自架 LLM 與多模態模型（Llama、GPT-OSS、Phi-4 Multimodal、Florence-2），用於影音轉錄、摘要、資訊分析與業務流程。',
-    en: 'Self-hosted LLMs and multimodal models (Llama, GPT-OSS, Phi-4 Multimodal, Florence-2) for transcription, summarization, analysis and business workflows.',
+    zh: '以自架 LLM 與多模態模型（Llama、GPT-OSS、Phi-4 Multimodal、Florence-2）支撐影音轉錄、摘要、資訊分析與 AI 輔助業務流程，並透過 MCP 中介層串接內部系統。',
+    en: 'Transcription, summarization, analysis and AI-assisted workflows on self-hosted LLMs and multimodal models (Llama, GPT-OSS, Phi-4 Multimodal, Florence-2), connected to internal systems through an MCP middleware layer.',
     tags: ['LLM', 'RAG', 'MCP'],
   },
   {
     name: { zh: 'FEZone', en: 'FEZone' },
     href: 'https://fezone.tw',
-    zh: '軟體開發、遊戲與財經部落格的品牌網站。',
-    en: 'Brand site for software development, games and a finance blog.',
+    zh: '個人品牌網站，內容涵蓋軟體開發、遊戲與財經。',
+    en: 'Personal brand site covering software development, games and finance.',
   },
 ];
 

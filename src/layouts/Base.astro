@@ -16,6 +16,17 @@ const t = ui[lang];
 const fullTitle = title ? `${title} · ${profile.name}` : profile.name;
 const desc = description ?? profile[lang].tagline;
 const other: Lang = lang === 'zh' ? 'en' : 'zh';
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: lang === 'zh' ? '生成式 AI 工程師' : 'Generative AI Engineer',
+  url: Astro.site?.toString(),
+  email: profile.email ? `mailto:${profile.email}` : undefined,
+  sameAs: profile.links.map((l) => l.href),
+  knowsAbout: ['Generative AI', 'Edge AI', 'Computer Vision', 'LLM', 'Inference Optimization'],
+  alumniOf: ['National Chiao Tung University', 'National Central University'],
+};
 ---
 
 <!doctype html>
@@ -31,6 +42,10 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_TW' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
   </head>
   <body>
     <header class="site-header">
