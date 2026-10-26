@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PostList from './PostList.astro';
 import { base, ui, type Lang } from '../i18n';
-import { profile, projects } from '../data/profile';
+import { profile, highlights, experience, skills, projects, education, languages } from '../data/profile';
 
 interface Props {
   lang: Lang;
@@ -23,24 +23,85 @@ const me = profile[lang];
     </div>
   </section>
 
-  <h2>{t.about}</h2>
+  <ul class="stats">
+    {
+      highlights.map((h) => (
+        <li>
+          <strong>{h.value}</strong>
+          <span>{h.label[lang]}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 id="about">{t.about}</h2>
   {me.about.map((para) => <p>{para}</p>)}
 
-  {
-    projects.length > 0 && (
-      <>
-        <h2>{t.projects}</h2>
-        <ul class="cards">
-          {projects.map((p) => (
-            <li>
-              <h3>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</h3>
-              <p>{p[lang]}</p>
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-  }
+  <h2 id="experience">{t.experience}</h2>
+  <ol class="timeline">
+    {
+      experience.map((job) => (
+        <li>
+          <div class="job-head">
+            <h3>{job.role[lang]}</h3>
+            <span class="muted period">{job.period.endsWith(' ') ? job.period + t.present : job.period}</span>
+          </div>
+          <p class="company">{job.company[lang]}</p>
+          <ul>
+            {job.points.map((p) => (
+              <li>{p[lang]}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h2 id="projects">{t.projects}</h2>
+  <ul class="cards">
+    {
+      projects.map((p) => (
+        <li>
+          <h3>{p.href ? <a href={p.href}>{p.name[lang]}</a> : p.name[lang]}</h3>
+          <p>{p[lang]}</p>
+          {p.tags && (
+            <div class="tags">
+              {p.tags.map((tag) => (
+                <span>{tag}</span>
+              ))}
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 id="skills">{t.skills}</h2>
+  <dl class="skills">
+    {
+      skills.map((s) => (
+        <>
+          <dt>{s.group[lang]}</dt>
+          <dd>{s.items}</dd>
+        </>
+      ))
+    }
+  </dl>
+
+  <h2 id="education">{t.education}</h2>
+  <ul class="plain">
+    {
+      education.map((e) => (
+        <li>
+          <strong>{e.school[lang]}</strong> · {e.degree[lang]} <span class="muted">{e.period}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <h3 class="sub">{t.languages}</h3>
+  <ul class="plain">
+    {languages.map((l) => <li>{l[lang]}</li>)}
+  </ul>
 
   <h2>{t.latestPosts}</h2>
   <PostList lang={lang} limit={5} />
