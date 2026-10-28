@@ -102,7 +102,7 @@ const [lede, ...about] = me.about;
         {
           education.map((e) => (
             <li class="entry">
-              <span class="entry-meta">{e.period}</span>
+              {e.period && <span class="entry-meta">{e.period}</span>}
               <h3>{e.school[lang]}</h3>
               <p class="org">{e.degree[lang]}</p>
             </li>
