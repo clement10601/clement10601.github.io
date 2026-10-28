@@ -8,6 +8,7 @@ export const base: Record<Lang, string> = { zh: '/', en: '/en/' };
 export const ui = {
   zh: {
     home: '首頁',
+    detectTag: '工程師 0.99',
     blog: '文章',
     about: '關於我',
     projects: '精選專案',
@@ -26,6 +27,7 @@ export const ui = {
   },
   en: {
     home: 'Home',
+    detectTag: 'engineer 0.99',
     blog: 'Blog',
     about: 'About',
     projects: 'Selected projects',
