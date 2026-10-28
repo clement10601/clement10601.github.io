@@ -12,6 +12,8 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
 ---
 
 <Base lang={lang} title={ui[lang].blog} altHref={`${base[other]}blog/`}>
-  <h1>{ui[lang].blog}</h1>
-  <PostList lang={lang} />
+  <div class="page">
+    <h1>{ui[lang].blog}</h1>
+    <div class="page-list"><PostList lang={lang} /></div>
+  </div>
 </Base>

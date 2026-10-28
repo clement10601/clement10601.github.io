@@ -19,12 +19,12 @@ const altHref = `${base[other]}blog/${translated ? `${post.slug}/` : ''}`;
 ---
 
 <Base lang={lang} title={post.data.title} description={post.data.summary} altHref={altHref}>
-  <article>
+  <article class="page">
     <h1>{post.data.title}</h1>
     <time class="muted" datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
     <div class="prose">
       <Content />
     </div>
   </article>
-  <p><a href={`${base[lang]}blog/`}>{ui[lang].backToBlog}</a></p>
+  <p class="page back"><a href={`${base[lang]}blog/`}>{ui[lang].backToBlog}</a></p>
 </Base>

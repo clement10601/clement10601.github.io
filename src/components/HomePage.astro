@@ -11,99 +11,115 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang];
 const me = profile[lang];
+const [lede, ...about] = me.about;
 ---
 
 <Base lang={lang} altHref={lang === 'zh' ? base.en : base.zh}>
-  <section class="hero">
-    <h1>{profile.name}</h1>
-    <p class="muted">{me.tagline}</p>
-    <div class="links">
+  <header class="hero">
+    <h1 class="hero-name" aria-label={profile.name}>
+      <span class="bbox">
+        <span class="bbox-tag" aria-hidden="true">{t.detectTag}</span>
+        {profile.name.split(' ').map((w) => <span class="bbox-word">{w}</span>)}
+      </span>
+    </h1>
+    <p class="deck">{lede}</p>
+    <p class="hero-links">
       {profile.links.map((l) => <a href={l.href}>{l.label}</a>)}
-      {profile.email && <a href={`mailto:${profile.email}`}>Email</a>}
+      {profile.email && <a href={`mailto:${profile.email}`}>{profile.email}</a>}
+    </p>
+  </header>
+
+  <section class="section" aria-labelledby="about">
+    <h2 id="about">{t.about}</h2>
+    <div>
+      {about.map((para) => <p>{para}</p>)}
+      <dl class="figures">
+        {
+          highlights.map((h) => (
+            <>
+              <dt>{h.value}</dt>
+              <dd>{h.label[lang]}</dd>
+            </>
+          ))
+        }
+      </dl>
     </div>
   </section>
 
-  <ul class="stats">
-    {
-      highlights.map((h) => (
-        <li>
-          <strong>{h.value}</strong>
-          <span>{h.label[lang]}</span>
-        </li>
-      ))
-    }
-  </ul>
-
-  <h2 id="about">{t.about}</h2>
-  {me.about.map((para) => <p>{para}</p>)}
-
-  <h2 id="experience">{t.experience}</h2>
-  <ol class="timeline">
-    {
-      experience.map((job) => (
-        <li>
-          <div class="job-head">
+  <section class="section" aria-labelledby="experience">
+    <h2 id="experience">{t.experience}</h2>
+    <ol class="entries">
+      {
+        experience.map((job) => (
+          <li class="entry">
+            <span class="entry-meta">{job.period.endsWith(' ') ? job.period + t.present : job.period}</span>
             <h3>{job.role[lang]}</h3>
-            <span class="muted period">{job.period.endsWith(' ') ? job.period + t.present : job.period}</span>
-          </div>
-          <p class="company">{job.company[lang]}</p>
-          <ul>
-            {job.points.map((p) => (
-              <li>{p[lang]}</li>
-            ))}
-          </ul>
-        </li>
-      ))
-    }
-  </ol>
-
-  <h2 id="projects">{t.projects}</h2>
-  <ul class="cards">
-    {
-      projects.map((p) => (
-        <li>
-          <h3>{p.href ? <a href={p.href}>{p.name[lang]}</a> : p.name[lang]}</h3>
-          <p>{p[lang]}</p>
-          {p.tags && (
-            <div class="tags">
-              {p.tags.map((tag) => (
-                <span>{tag}</span>
+            <p class="org">{job.company[lang]}</p>
+            <ul>
+              {job.points.map((p) => (
+                <li>{p[lang]}</li>
               ))}
-            </div>
-          )}
-        </li>
-      ))
-    }
-  </ul>
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
 
-  <h2 id="skills">{t.skills}</h2>
-  <dl class="skills">
-    {
-      skills.map((s) => (
-        <>
-          <dt>{s.group[lang]}</dt>
-          <dd>{s.items}</dd>
-        </>
-      ))
-    }
-  </dl>
+  <section class="section" aria-labelledby="projects">
+    <h2 id="projects">{t.projects}</h2>
+    <ul class="entries">
+      {
+        projects.map((p) => (
+          <li class="entry">
+            <h3>{p.href ? <a href={p.href}>{p.name[lang]}</a> : p.name[lang]}</h3>
+            <p>{p[lang]}</p>
+            {p.tags && <p class="stack">{p.tags.join(lang === 'zh' ? '、' : ', ')}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <h2 id="education">{t.education}</h2>
-  <ul class="plain">
-    {
-      education.map((e) => (
-        <li>
-          <strong>{e.school[lang]}</strong> · {e.degree[lang]} <span class="muted">{e.period}</span>
-        </li>
-      ))
-    }
-  </ul>
-  <h3 class="sub">{t.languages}</h3>
-  <ul class="plain">
-    {languages.map((l) => <li>{l[lang]}</li>)}
-  </ul>
+  <section class="section" aria-labelledby="skills">
+    <h2 id="skills">{t.skills}</h2>
+    <dl class="skills">
+      {
+        skills.map((s) => (
+          <>
+            <dt>{s.group[lang]}</dt>
+            <dd>{s.items}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
 
-  <h2>{t.latestPosts}</h2>
-  <PostList lang={lang} limit={5} />
-  <p><a href={`${base[lang]}blog/`}>{t.allPosts} →</a></p>
+  <section class="section" aria-labelledby="education">
+    <h2 id="education">{t.education}</h2>
+    <div>
+      <ul class="entries">
+        {
+          education.map((e) => (
+            <li class="entry">
+              <span class="entry-meta">{e.period}</span>
+              <h3>{e.school[lang]}</h3>
+              <p class="org">{e.degree[lang]}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="plain" aria-label={t.languages}>
+        {languages.map((l) => <li>{l[lang]}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="writing">
+    <h2 id="writing">{t.latestPosts}</h2>
+    <div>
+      <PostList lang={lang} limit={5} />
+      <p class="more"><a href={`${base[lang]}blog/`}>{t.allPosts}</a></p>
+    </div>
+  </section>
 </Base>
