@@ -9,6 +9,7 @@ export const profile = {
   links: [
     { label: 'GitHub', href: 'https://github.com/clement10601' },
     { label: 'FEZone', href: 'https://fezone.tw' },
+    { label: 'Ko-fi', href: 'https://ko-fi.com/fezonetw' },
   ],
   zh: {
     tagline: '生成式 AI 工程師｜邊緣 AI 與電腦視覺',
