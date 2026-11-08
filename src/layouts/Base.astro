@@ -9,17 +9,25 @@ interface Props {
   description?: string;
   // Same page in the other language, for the language switch.
   altHref: string;
+  // False when altHref is not a translation of this page (e.g. a post that
+  // only exists in one language); hreflang must only pair true translations.
+  translated?: boolean;
+  // Extra JSON-LD nodes for this page (e.g. a BlogPosting).
+  jsonLd?: Record<string, unknown>[];
+  // Keep the page out of search results (404).
+  noindex?: boolean;
 }
 
-const { lang, title, description, altHref } = Astro.props;
+const { lang, title, description, altHref, translated = true, jsonLd = [], noindex = false } = Astro.props;
 const t = ui[lang];
 const fullTitle = title ? `${title} · ${profile.name}` : profile.name;
 const desc = description ?? profile[lang].tagline;
 const other: Lang = lang === 'zh' ? 'en' : 'zh';
 const isBlog = Astro.url.pathname.includes('/blog/');
+const personId = new URL('/#person', Astro.site).href;
 const person = {
-  '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': personId,
   name: profile.name,
   jobTitle: lang === 'zh' ? '生成式 AI 工程師' : 'Generative AI Engineer',
   url: Astro.site?.toString(),
@@ -28,6 +36,21 @@ const person = {
   knowsAbout: ['Generative AI', 'Edge AI', 'Computer Vision', 'LLM', 'Inference Optimization'],
   alumniOf: ['National Chiao Tung University', 'National Central University'],
 };
+// The home pages are profile pages about the person; every page carries the
+// Person node so posts can point their author at it by @id.
+const isHome = Astro.url.pathname === base[lang];
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    person,
+    ...(isHome
+      ? [{ '@type': 'ProfilePage', url: new URL(Astro.url.pathname, Astro.site).href, mainEntity: { '@id': personId }, inLanguage: htmlLang[lang] }]
+      : []),
+    ...jsonLd.map((node) => ({ author: { '@id': personId }, ...node })),
+  ],
+};
+const self = new URL(Astro.url.pathname, Astro.site);
+const zhHref = lang === 'zh' ? self : new URL(altHref, Astro.site);
 ---
 
 <!doctype html>
@@ -46,15 +69,22 @@ const person = {
     />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <link rel="alternate" hreflang={htmlLang[other]} href={new URL(altHref, Astro.site)} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={self} />
+    {translated && !noindex && (
+      <>
+        <link rel="alternate" hreflang={htmlLang[lang]} href={self} />
+        <link rel="alternate" hreflang={htmlLang[other]} href={new URL(altHref, Astro.site)} />
+        <link rel="alternate" hreflang="x-default" href={zhHref} />
+      </>
+    )}
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:locale" content={lang === 'zh' ? 'zh_TW' : 'en_US'} />
     <meta name="twitter:card" content="summary" />
-    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script type="application/ld+json" set:html={JSON.stringify(graph).replace(/</g, '\\u003c')} />
   </head>
   <body>
     <header class="site-header">
