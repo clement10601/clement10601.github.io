@@ -16,9 +16,19 @@ const { Content } = await render(post);
 const other: Lang = lang === 'zh' ? 'en' : 'zh';
 const translated = (await getPosts(other)).some((p) => p.slug === post.slug);
 const altHref = `${base[other]}blog/${translated ? `${post.slug}/` : ''}`;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const posting = {
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.summary,
+  datePublished: post.data.date.toISOString(),
+  inLanguage: lang === 'zh' ? 'zh-Hant-TW' : 'en',
+  mainEntityOfPage: url,
+  url,
+};
 ---
 
-<Base lang={lang} title={post.data.title} description={post.data.summary} altHref={altHref}>
+<Base lang={lang} title={post.data.title} description={post.data.summary} altHref={altHref} translated={translated} jsonLd={[posting]}>
   <article class="page">
     <h1>{post.data.title}</h1>
     <time class="muted" datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
